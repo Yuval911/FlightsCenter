@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="DBGenerator.DataFieldUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DBGenerator"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="400">
+    <StackPanel Orientation="Horizontal">
+        
+        <TextBlock Text="{Binding FieldLabel}" FontSize="18" Margin="0 0 20 0"/>
+        
+        <TextBox Text="{Binding ItemsNum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                 Width="50" Margin="0 0 20 0">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsInvalidItemsNum}" Value="True">
+                            <Setter Property="ToolTip" Value="Invalid items number"/>
+                            <Setter Property="Background" Value="#FFFFB7B7"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        
+        <TextBlock 
+            Text="{Binding MaxItems, StringFormat='(Max: {0})'}" FontSize="18" Margin="0 0 20 0"/>
+
+        <TextBlock FontSize="14"  VerticalAlignment="Bottom">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="Currently in the DB:  {0} {1}">
+                    <Binding Path="CurrentItemsNumber" />
+                    <Binding Path="ItemsTypeLabel" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
+
+    </StackPanel>
+</UserControl>

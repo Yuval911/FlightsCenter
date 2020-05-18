@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flights Center</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='media/favicon.ico' type='image/x-icon' >
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="styles/styles.css" rel="stylesheet">
+    <script src="scripts/main.js"></script>
+    <script src="scripts/flights-table.js"></script>
+    <script src="scripts/data-connector.js"></script>
+    <script src="scripts/ui-controller.js"></script>
+
+</head>
+<body>
+
+    <div class="main">
+
+        <h3 id="heading">Our Flights Board:</h3>
+
+        <div id="radio-options-container">
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="arrivals-option" name="radio-btn" checked="checked">
+                <label class="custom-control-label" for="arrivals-option">Arrivals</label>
+                <img src="media/land-icon.png" class="plane-icon" />
+            </div>
+
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="departures-option" name="radio-btn">
+                <label class="custom-control-label" for="departures-option">Departures</label>
+                <img src="media/dep-icon.png" class="plane-icon" />
+            </div>
+
+        </div>
+
+        <div id="filter-params">
+
+            <div class="form-cont">
+                <label for="airlines">Airline Company: &nbsp;</label>
+                <select id="airlines" class="form-control" disabled="true">
+                    <option value="any">Any</option>
+                </select>
+            </div>
+
+            <div class="form-cont">
+                <label for="origin">Origin Country: &nbsp;</label>
+                <select id="origin" class="form-control" disabled="true">
+                    <option value="any">Any</option>
+                </select>
+            </div>
+
+            <div class="form-cont">
+                <label for="destination">Destination Country: &nbsp;</label>
+                <select id="destination" class="form-control" disabled="true">
+                    <option value="any">Any</option>
+                </select>
+            </div>
+
+            <div class="form-cont">
+                <label for="flight-id" >Flight ID: &nbsp;</label>
+                <input type="text" id="flight-id" class="form-control" disabled="true">
+            </div>
+
+        </div>
+
+        <div id="flights-table-container">
+            <table id="flights-table" class="table">
+                <tr>
+                    <th>Flight ID</th>
+                    <th>Airline Company</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Estimated Time</th>
+                    <th>Status</th>
+                </tr>
+            </table>
+
+            <img src="media/loading-data.gif" class="loading-data-anim"/>
+
+            <div class="error-container">
+                <img src="media/error-icon.png" class="error-icon"/>
+                <h5 class="error-message">An error occurred while recieving the data</h5>
+                <button id="reload-btn" class="btn btn-info" onclick="location.reload();">Reload</button>
+            </div>
+
+            <div class="no-flights-message">No flights to show right now</div>
+
+        </div>
+    </div> <!-- end of main div -->
+    <div>
+        <img src="media/loading-page.gif" class="loading-page-anim"/>
+    </div>
+    
+
+</body>
+</html>

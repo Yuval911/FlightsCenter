@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="register">
+<head>
+    <title>Register</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='media/favicon.ico' type='image/x-icon' >
+
+    <!-- Bootstrap & JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Angular -->   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+    <!-- Styles and Scripts -->
+    <link href="styles/styles.css" rel="stylesheet">
+    <script src="js/app-bootstrap.js"></script>
+    <script src="js/airline-register.ctrl.js"></script>
+    <script src="js/constants.service.js"></script>
+    <script src="js/username-check.service.js"></script>
+</head>
+<body ng-controller="AirlineRegisterCtrl">
+
+    <div class="main main-content" ng-show="submitStatus != 'succedded' && pageStatus == 'loaded'">
+
+        <h2 class="title">Sign Up</h2>
+        <p class="instructions">To create a new airline company account, please fill in all the fields:</p>
+
+        <form name="form" ng-submit="register()">
+
+            <div class="form-group">
+                <label for="name">Company name</label>
+                <input type="text" name="name" id="name" class="form-control" ng-model="airline.name" 
+                    ng-class="{ 'is-invalid': form.name.$touched && form.name.$error.required }" ng-maxlength="20" required />
+                <span ng-show="form.name.$touched && form.name.$error.required" class="help-block">First name is required</span>
+                <span ng-show="form.name.$touched && form.name.$invalid && !form.name.$error.required" class="help-block">Maximum 20 characters allowed</span>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control" ng-model="airline.userName"
+                    ng-class="{ 'is-invalid': (form.username.$touched && form.username.$error.required) || (usernameCheckStatus == 'taken') }" ng-maxlength="20" required/>
+                <!-- This notifies the user if the username is taken or not -->
+                <div class="checking-username" ng-show="form.username.$valid && usernameCheckStatus == 'checking'">Checking Username...</div>
+                <div class="username-is-free" ng-show="form.username.$valid && usernameCheckStatus == 'available'">Username is available!</div>
+                <div class="username-is-taken" ng-show="form.username.$valid && usernameCheckStatus == 'taken'">Username is already taken</div>
+                <div class="checking-username" ng-show="form.username.$valid && usernameCheckStatus == 'error'">**Error connecting to the server**</div>
+                <!-- Help blocks-->
+                <span ng-show="form.username.$touched && form.username.$error.required" class="help-block">Username is required</span>
+                <span ng-show="form.username.$touched && form.username.$invalid && !form.username.$error.required" class="help-block">Maximum 20 characters allowed</span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" class="form-control" ng-model="airline.email"
+                    ng-class="{ 'is-invalid': form.email.$touched && form.email.$error.required }" required />
+                <span ng-show="form.email.$touched && form.email.$invalid" class="help-block">Please provide a valid Email address</span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" ng-model="airline.password" minlength="8"
+                    ng-class="{ 'is-invalid': form.password.$touched && form.password.value.length }" ng-minlength="8" required />
+                <span ng-show="form.password.$touched && form.password.$invalid" class="help-block">Password must have at least 8 characters</span>
+            </div>
+
+            <div class="form-group">
+                <label for="countrycode">Origin country</label>
+                <select name="countrycode" id="countrycode" class="form-control" ng-model="airline.countryCode"
+                    ng-class="{ 'is-invalid': form.countrycode.$touched && form.countrycode.$error.required }" required
+                    ng-options="country.Id as country.Name for country in countries track by country.Id">
+                    <option value="1">-Select-</option>
+                </select>
+                <span ng-show="form.countrycode.$touched && form.countrycode.$error.required" class="help-block">Origin country is required</span>
+            </div>
+
+            <!-- Submit button -->
+
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || usernameCheckStatus == 'taken' || usernameCheckStatus == 'checking' || submitStatus == 'loading'" 
+                    class="btn btn-primary">Register</button>
+                <a href="javascript:history.back()" class="btn btn-link">Cancel</a>
+            </div>
+            
+        </form>
+    </div>
+
+    <div class="error-container" ng-show="submitStatus == 'error'">
+        <img src="media/error-icon.png" class="error-icon"/>
+        <h3 class="error-message">An error occurred while sending the data. </h3>
+    </div>
+
+    <div class="error-container" ng-show="pageStatus == 'error'">
+        <img src="media/error-icon.png" class="error-icon"/>
+        <h3 class="error-message">An error occurred while receiving the data. </h3>
+    </div>
+
+    <img src="media/loading-data.gif" class="loading-anim" ng-show="pageStatus == 'loading' || submitStatus == 'loading'"/>
+
+    <div class="success-container" ng-show="submitStatus == 'succedded'">
+        <h4 class="success-headline">Your details was received successfully!</h4>
+        <img src="media/success.png" class="success-icon">
+        <h6>Your account will be created as soon as the administrator approves it.</h6>
+        <button class="go-to-site-btn btn btn-primary" ng-click="goToHomePage()">Go to Home Page</button>
+    </div>
+
+</body>
+</html>

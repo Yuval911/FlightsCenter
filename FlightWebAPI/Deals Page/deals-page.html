@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="dealsPage">
+<head>
+    <title>Deals</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='media/favicon.ico' type='image/x-icon' >
+
+    <!-- Bootstrap & JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Angular -->   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+    <!-- Styles -->
+    <link href="styles/styles.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script src="js/app-bootstrap.js"></script>
+    <script src="js/cards.ctrl.js"></script>  
+</head>
+<body>
+
+    <div class="main" ng-controller="CardsCtrl">
+
+        <div class="form-group" id="country-select" ng-show="!loadingCountries">
+            <label for="countrycode">Select your country: &nbsp;</label>
+            <select name="countrycode" id="countrycode" class="form-control" ng-model="selectedCountry" ng-change="getFlightsDeals()"
+                ng-options="country.Id as country.Name for country in countries track by country.Id">
+            </select>
+        </div>
+
+        <img src="media/loading-data.gif" class="loading-page-anim" ng-show="loadingCountries"/>
+
+        <div class="cards-display" ng-show="selectedCountry > 0">
+            <h1 class="heading">Choose your destination:</h1>
+
+            <div class="cards-container">
+                <div class="card" ng-repeat="card in cards" ng-click="goToFlights(card.link)">
+                    <img src="media/destinations/{{card.imgName}}" class="card-image" />
+                    <h3 class="card-title">{{card.name}}</h3>
+                    <div class="card-price-container">
+                        <h5 class="card-price">Starting from {{card.price}}$</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <img src="media/loading-data.gif" class="loading-page-anim" ng-show="loadingDeals"/>
+
+        </div>
+
+        <div class="error-container" ng-show="errorState">
+            <img src="media/error-icon.png" class="error-icon"/>
+            <h3 class="error-message">An error occurred while receiving the data. </h3>
+            <button id="reload-btn" class="btn btn-info" onclick="location.reload();">Reload</button>
+        </div>
+
+    </div>
+</body>
+</html>

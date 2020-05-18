@@ -1,0 +1,228 @@
+
+/* Page */
+
+body
+{
+  background: none;
+  text-align: center;
+}
+
+.main
+{
+  margin: 2%;
+}
+
+.heading
+{
+  font-size: calc(1.5em + 1vw);
+  text-shadow: 0 0 10px white;
+  margin-bottom: 0.6em;
+}
+
+/* Select */
+
+#country-select label
+{
+  display: inline-block;
+  font-weight: 500;
+  font-size: calc(1em + 0.5vw);
+}
+
+#countrycode
+{
+  display: inline-block;
+  width: 8em;
+}
+
+/* Deal Cards */
+
+.cards-container
+{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+a
+{
+  color: black;
+}
+
+a:hover
+{
+  text-decoration: none;
+  color: black;
+}
+
+.card
+{
+  position: relative;
+  padding: 1%;
+  margin: 1%;
+  height: fit-content;
+  width: 16vw;  /* See media queries below */
+  border-radius: 3.5%;
+  background-color: rgb(255, 255, 255, 0.6);
+  transition: all .15s ease-in-out;
+  animation: slideUp 1.4s ease-out;
+}
+
+@keyframes slideUp
+{
+  0% {
+    transform: translateY(200vh);
+  }
+  100% {
+  }
+}
+
+.card:hover
+{
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.card-title
+{
+  text-align: center;
+  font-size: 2em;
+}
+
+.card-image
+{
+  align-self: center;
+  border-radius: 3.5%;
+  width: 14vw;  /* See media queries below */
+}
+
+.card-price-container
+{
+  background-color: rgb(119, 199, 119);
+  padding: 1% 2% 0.5% 2%;
+  border-radius: 3%;
+  width: fit-content;
+  margin: auto;
+}
+
+.card-price
+{
+  text-align: center;
+}
+
+/* MQ */
+
+@media screen and (max-width: 2100px)
+{
+  .card
+  {
+    width: 18vw;
+  }
+  .card-image
+  {
+    width: 16vw;
+  }
+}
+
+@media screen and (max-width: 1450px)
+{
+  .card
+  {
+    width: 22vw;
+  }
+  .card-image
+  {
+    width: 20vw;
+  }
+}
+
+@media screen and (max-width: 1300px)
+{
+  .card
+  {
+    width: 25vw;
+  }
+  .card-image
+  {
+    width: 23vw;
+  }
+}
+
+@media screen and (max-width: 950px)
+{
+  .card
+  {
+    width: 35vw;
+  }
+  .card-image
+  {
+    width: 33vw;
+  }
+}
+
+@media screen and (max-width: 670px)
+{
+  .card
+  {
+    width: 69vw;
+  }
+  .card-image
+  {
+    width: 64vw;
+  }
+}
+
+@media screen and (max-width: 420px)
+{
+  .card
+  {
+    width: 80vw;
+  }
+  .card-image
+  {
+    width: 72vw;
+  }
+}
+
+
+/* Loading Indicator */
+
+.loading-page-anim
+{
+  margin: 2em auto;
+  width: 5em;
+}
+
+/* Error Indicators */
+
+.error-container
+{
+  margin: 5%;
+}
+
+.error-icon
+{
+  display: inline-block;
+  width: 5%;
+  min-width: 32px;
+  opacity: 0.75;
+  margin-right: 1%;
+}
+
+.error-message
+{
+  display: inline-block;
+  font-weight: 400;
+  font-size: calc(1.2vw + 16px);
+  margin: 0;
+  vertical-align: middle;
+}
+
+#reload-btn
+{
+  display: inline-block;
+  margin-left: 1%;
+  font-size: calc(1vw + 14px);
+}
+

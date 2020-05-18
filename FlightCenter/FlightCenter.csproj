@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{884B992B-6D16-4CA7-8830-077423269AFE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FlightCenter</RootNamespace>
+    <AssemblyName>FlightCenter</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Common.5.8.0\lib\net45\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Interfaces.5.8.0\lib\net45\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Redis.5.8.0\lib\net45\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.5.8.0\lib\net45\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAO\AirlineRedisDAO.cs" />
+    <Compile Include="DAO\BasicMySqlDAO.cs" />
+    <Compile Include="Exceptions\FlightCenterException.cs" />
+    <Compile Include="Exceptions\NotFound\TicketNotFoundException.cs" />
+    <Compile Include="Exceptions\NotFound\FlightNotFoundException.cs" />
+    <Compile Include="Exceptions\NotFound\CustomerNotFoundException.cs" />
+    <Compile Include="Exceptions\NotFound\CountryNotFoundException.cs" />
+    <Compile Include="Exceptions\NotFound\AirlineCompanyNotFoundException.cs" />
+    <Compile Include="Exceptions\CannotUpdateTicketException.cs" />
+    <Compile Include="Exceptions\InvalidTicketPurchaseException.cs" />
+    <Compile Include="DAO\Interfaces\ITestsDAO.cs" />
+    <Compile Include="Exceptions\NoTicketsRemainingException.cs" />
+    <Compile Include="DAO\TestsMySqlDAO.cs" />
+    <Compile Include="Exceptions\OneTicketForCustomerOnlyException.cs" />
+    <Compile Include="Exceptions\AirlineCompanyNameAlreadyExistException.cs" />
+    <Compile Include="DAO\AirlineMySqlDAO.cs" />
+    <Compile Include="Exceptions\UserNameAlreadyExistException.cs" />
+    <Compile Include="Exceptions\InvalidData\InvalidTicketException.cs" />
+    <Compile Include="Exceptions\InvalidData\InvalidFlightException.cs" />
+    <Compile Include="Exceptions\InvalidData\InvalidCustomerException.cs" />
+    <Compile Include="Exceptions\InvalidData\InvalidCountryException.cs" />
+    <Compile Include="Exceptions\InvalidData\InvalidAirlineCompanyException.cs" />
+    <Compile Include="Exceptions\CountriesCannotBeChangedException.cs" />
+    <Compile Include="DAO\CountryMySqlDAO.cs" />
+    <Compile Include="DAO\CustomerMySqlDAO.cs" />
+    <Compile Include="Exceptions\DataConnectorException.cs" />
+    <Compile Include="DAO\FlightMySqlDAO.cs" />
+    <Compile Include="DAO\Interfaces\IAirlineDAO.cs" />
+    <Compile Include="DAO\Interfaces\IBasicDB.cs" />
+    <Compile Include="DAO\Interfaces\ICountryDAO.cs" />
+    <Compile Include="DAO\Interfaces\ICustomerDAO.cs" />
+    <Compile Include="DAO\Interfaces\IFlightDAO.cs" />
+    <Compile Include="DAO\Interfaces\ITicketDAO.cs" />
+    <Compile Include="DAO\TicketMySqlDAO.cs" />
+    <Compile Include="Facades\AnonymousUserFacade.cs" />
+    <Compile Include="Facades\FacadeBase.cs" />
+    <Compile Include="Facades\Interfaces\IAnonymousUserFacade.cs" />
+    <Compile Include="Facades\Interfaces\ILoggedInAdministratorFacade.cs" />
+    <Compile Include="Facades\Interfaces\ILoggedInAirlineFacade.cs" />
+    <Compile Include="Facades\Interfaces\ILoggedInCustomerFacade.cs" />
+    <Compile Include="Exceptions\InvalidTokenException.cs" />
+    <Compile Include="Facades\Interfaces\ITestFacade.cs" />
+    <Compile Include="Facades\LoggedInAdministratorFacade.cs" />
+    <Compile Include="Facades\LoggedInAirlineFacade.cs" />
+    <Compile Include="Facades\LoggedInCustomerFacade.cs" />
+    <Compile Include="Facades\TestFacade.cs" />
+    <Compile Include="FlightCenterSystem.cs" />
+    <Compile Include="GlobalConfig.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="LoginService\ILoginService.cs" />
+    <Compile Include="LoginService\ILoginToken.cs" />
+    <Compile Include="LoginService\LoginService.cs" />
+    <Compile Include="LoginService\LoginToken.cs" />
+    <Compile Include="Poco\Administrator.cs" />
+    <Compile Include="Poco\AirlineCompany.cs" />
+    <Compile Include="Poco\Anonymous.cs" />
+    <Compile Include="Poco\Country.cs" />
+    <Compile Include="Poco\Customer.cs" />
+    <Compile Include="Poco\Flight.cs" />
+    <Compile Include="Poco\IPoco.cs" />
+    <Compile Include="Poco\IUser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Poco\Ticket.cs" />
+    <Compile Include="Exceptions\WrongPasswordException.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

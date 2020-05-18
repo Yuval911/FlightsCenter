@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="register">
+<head>
+    <title>Register</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='media/favicon.ico' type='image/x-icon' >
+
+    <!-- Bootstrap & JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Angular -->   
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+    <!-- Styles and Scripts -->
+    <link href="styles/styles.css" rel="stylesheet">
+    <script src="js/app-bootstrap.js"></script>
+    <script src="js/user-register.ctrl.js"></script>
+    <script src="js/constants.service.js"></script>
+    <script src="js/username-check.service.js"></script>
+</head>
+<body ng-controller="UserRegisterCtrl">
+    <div class="main main-content" ng-show="submitStatus != 'succedded'">
+
+        <h2 class="title">Sign Up</h2>
+        <p class="instructions">To create a new customer account, please fill in all the fields:</p>
+
+        <form name="form" ng-submit="register()">
+
+            <div class="form-group">
+                <label for="firstName">First name</label>
+                <input type="text" name="firstName" id="firstName" class="form-control" ng-model="customer.firstName" 
+                    ng-class="{ 'is-invalid': form.firstName.$touched && form.firstName.$error.required }" ng-maxlength="20" required />
+                <span ng-show="form.firstName.$touched && form.firstName.$error.required" class="help-block">First name is required</span>
+                <span ng-show="form.firstName.$touched && form.firstName.$invalid && !form.firstName.$error.required" class="help-block">Maximum 20 characters allowed</span>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last name</label>
+                <input type="text" name="lastName" id="lastName" class="form-control" ng-model="customer.lastName"
+                    ng-class="{ 'is-invalid': form.lastName.$touched && form.lastName.$error.required }" ng-maxlength="20" required />
+                <span ng-show="form.lastName.$touched && form.lastName.$error.required" class="help-block">Last name is required</span>
+                <span ng-show="form.lastName.$touched && form.lastName.$invalid && !form.lastName.$error.required" class="help-block">Maximum 20 characters allowed</span>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control" ng-model="customer.userName"
+                    ng-class="{ 'is-invalid': (form.username.$touched && form.username.$error.required) || (usernameCheckStatus == 'taken') }" ng-maxlength="20" required username-check/>
+                <!-- This notifies the user if the username is taken or not -->
+                <div class="checking-username" ng-show="form.username.$valid && usernameCheckStatus == 'checking'">Checking Username...</div>
+                <div class="username-is-free" ng-show="form.username.$valid && usernameCheckStatus == 'available'">Username is available!</div>
+                <div class="username-is-taken" ng-show="form.username.$valid && usernameCheckStatus == 'taken'">Username is already taken</div>
+                <div class="checking-username" ng-show="form.username.$valid && usernameCheckStatus == 'error'">**Error connecting to the server**</div>
+                <!-- Help blocks-->
+                <span ng-show="form.username.$touched && form.username.$error.required" class="help-block">Username is required</span>
+                <span ng-show="form.username.$touched && form.username.$invalid && !form.username.$error.required" class="help-block">Maximum 20 characters allowed</span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="email" class="form-control" ng-model="customer.email"
+                    ng-class="{ 'is-invalid': form.email.$touched && form.email.$error.required }" required />
+                <span ng-show="form.email.$touched && form.email.$invalid" class="help-block">Please provide a valid Email address</span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" ng-model="customer.password" minlength="8"
+                    ng-class="{ 'is-invalid': form.password.$touched && form.password.value.length }" ng-minlength="8" required />
+                <span ng-show="form.password.$touched && form.password.$invalid" class="help-block">Password must have at least 8 characters</span>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" class="form-control" ng-model="customer.address"
+                    ng-class="{ 'is-invalid': form.address.$touched && form.address.$error.required }" required />
+                <span ng-show="form.address.$touched && form.address.$error.required" class="help-block">Address is required</span>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="text" name="phone" id="phone" class="form-control" ng-model="customer.phoneNo"
+                    ng-class="{ 'is-invalid': form.phone.$touched && form.phone.$error.required }" required />
+                <span ng-show="form.phone.$touched && form.phone.$error.required" class="help-block">Phone number is required</span>
+            </div>
+
+            <div class="form-group">
+                <label for="creditcard">Credit card number</label>
+                <input type="text" name="creditcard" id="creditcard" class="form-control" ng-model="customer.creditCardNo"
+                    ng-class="{ 'is-invalid': form.creditcard.$touched && form.creditcard.$error.required }" required />
+                <span ng-show="form.creditcard.$touched && form.creditcard.$error.required" class="help-block">Credit card is required</span>
+            </div>
+
+            <!-- Submit button -->
+
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || usernameCheckStatus == 'taken' || usernameCheckStatus == 'checking' || isLoading" 
+                    class="btn btn-primary">Register</button>
+                <a href="javascript:history.back()" class="btn btn-link">Cancel</a>
+            </div>
+            
+        </form>
+        
+        <img src="media/loading-data.gif" class="loading-anim" ng-show="isLoading"/>
+
+        <div class="error-container" ng-show="submitStatus == 'error'">
+            <img src="media/error-icon.png" class="error-icon"/>
+            <h3 class="error-message">An error occurred while sending the data. </h3>
+        </div>
+        
+    </div>
+
+    <div class="success-container" ng-show="submitStatus == 'succedded'">
+        <h4 class="success-headline">Your account was created successfully!</h4>
+        <img src="media/success.png" class="success-icon">
+        <h5>An email was sent to you.</h5>
+        <button class="go-to-site-btn btn btn-primary" ng-click="goToLoginPage()">Login to your account</button>
+    </div>
+
+</body>
+</html>
